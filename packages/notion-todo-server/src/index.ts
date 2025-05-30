@@ -1,4 +1,3 @@
-import { Client } from "@notionhq/client";
 import { Hono } from "hono";
 
 type Bindings = {
@@ -8,13 +7,18 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-app.get("/", (c) => {
-  // Initializing a client
-  const notion = new Client({
-    auth: c.env.NOTION_TOKEN,
+app.get("/", async (c) => {
+  const response = await fetch("https://api.notion.com/v1/users", {
+    headers: {
+      Authorization: `Bearer ${c.env.NOTION_TOKEN}`,
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+    },
   });
+  const listUsersResponse = await response.json();
 
-  console.log(c.env.NOTION_TOKEN);
+  console.log(listUsersResponse);
+
   return c.text("Hello Hono!");
 });
 
