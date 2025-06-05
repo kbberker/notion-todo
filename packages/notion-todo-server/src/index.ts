@@ -22,4 +22,29 @@ app.get("/", async (c) => {
   return c.text("Hello Hono!");
 });
 
+app.get("/databases/:id", async (c) => {
+  const id = c.req.param("id");
+
+  // const response = await fetch(`https://api.notion.com/v1/search`, {
+  //   method: "POST",
+  //   headers: {
+  //     Authorization: `Bearer ${c.env.NOTION_TOKEN}`,
+  //     "Notion-Version": "2022-06-28",
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  const response = await fetch(`https://api.notion.com/v1/databases/${id}`, {
+    headers: {
+      Authorization: `Bearer ${c.env.NOTION_TOKEN}`,
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+    },
+  });
+  const listUsersResponse = await response.json();
+
+  console.log(listUsersResponse);
+
+  return c.text("Hello Hono!");
+});
+
 export default app;
