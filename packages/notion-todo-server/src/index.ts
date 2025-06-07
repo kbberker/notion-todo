@@ -3,6 +3,7 @@ import type {
   SearchParameters,
 } from "@notionhq/client/build/src/api-endpoints";
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 
 type Bindings = {
   SECRET_KEY: string;
@@ -10,6 +11,9 @@ type Bindings = {
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+// TODO: Set up CORS properly
+app.use("*", cors());
 
 app.get("/", async (c) => {
   const response = await fetch("https://api.notion.com/v1/users", {
