@@ -18,6 +18,16 @@ export const TodoList = () => {
 
   console.log({ data });
 
+  const tasks = data?.results.map((task) => {
+    const name = Object.values(task.properties).find(
+      (property) => property.type === "title"
+    )?.title[0]?.plain_text;
+
+    return name;
+  });
+
+  console.log({ tasks });
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-bold">Todo List</h1>
