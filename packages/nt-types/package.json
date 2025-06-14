@@ -1,0 +1,22 @@
+{
+  "name": "nt-types",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "types": "./src/api/index.ts"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@notionhq/client": "^3.1.3"
+  }
+}
