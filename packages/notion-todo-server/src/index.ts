@@ -4,16 +4,15 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import type { HonoBindings } from "./types";
+import { databases } from "./routes/databases";
 
-type Bindings = {
-  SECRET_KEY: string;
-  NOTION_TOKEN: string;
-};
-
-const app = new Hono<{ Bindings: Bindings }>();
+const app = new Hono<{ Bindings: HonoBindings }>();
 
 // TODO: Set up CORS properly
 app.use("*", cors());
+
+app.route("/api/databases", databases);
 
 app.get("/", async (c) => {
   const response = await fetch("https://api.notion.com/v1/users", {
@@ -28,30 +27,6 @@ app.get("/", async (c) => {
   console.log(listUsersResponse);
 
   return c.text("Hello Hono!");
-});
-
-app.get("/databases/:id/tasks", async (c) => {
-  const id = c.req.param("id");
-
-  const response = await fetch(
-    `https://api.notion.com/v1/databases/${id}/query`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${c.env.NOTION_TOKEN}`,
-        "Notion-Version": "2022-06-28",
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  const databaseQueryResponse =
-    (await response.json()) as QueryDatabaseResponse;
-
-  console.log(databaseQueryResponse);
-
-  return c.json(databaseQueryResponse);
-  // return c.text("Hello Hono!");
 });
 
 app.get("/search", async (c) => {
