@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { ApiDatabaseResponse } from "nt-types";
 
 export const TodoList = () => {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["todos"],
     queryFn: async () => {
       const response = await fetch(
@@ -28,12 +28,25 @@ export const TodoList = () => {
 
   console.log({ tasks });
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!tasks || tasks.length === 0) {
+    return <div>No tasks found.</div>;
+  }
+
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Todo List</h1>
-      <p className="text-gray-600">
-        This is a placeholder for the Todo List feature.
-      </p>
+    <div>
+      <h1>Todo List</h1>
+
+      {tasks.map((task) => {
+        return (
+          <div key={Math.random()}>
+            <p>{task}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
