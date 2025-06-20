@@ -22,7 +22,5 @@ databases.get("/:id/tasks", async (c) => {
   const databaseQueryResponse =
     (await response.json()) as QueryDatabaseResponse;
 
-  console.log(databaseQueryResponse);
-
   return c.json(databaseQueryResponse);
 });
