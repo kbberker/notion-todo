@@ -14,21 +14,6 @@ app.use("*", cors());
 
 app.route("/api/databases", databases);
 
-app.get("/", async (c) => {
-  const response = await fetch("https://api.notion.com/v1/users", {
-    headers: {
-      Authorization: `Bearer ${c.env.NOTION_TOKEN}`,
-      "Notion-Version": "2022-06-28",
-      "Content-Type": "application/json",
-    },
-  });
-  const listUsersResponse = await response.json();
-
-  console.log(listUsersResponse);
-
-  return c.text("Hello Hono!");
-});
-
 app.get("/search", async (c) => {
   const id = c.req.param("id");
 
