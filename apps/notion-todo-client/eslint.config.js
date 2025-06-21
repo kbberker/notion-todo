@@ -3,6 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
+import pluginRouter from '@tanstack/eslint-plugin-router'
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -18,6 +19,7 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
     },
     rules: {
+      ...pluginRouter.configs['flat/recommended'], // this might not be correct
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
