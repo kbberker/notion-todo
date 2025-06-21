@@ -1,7 +1,4 @@
-import type {
-  QueryDatabaseResponse,
-  SearchParameters,
-} from "@notionhq/client/build/src/api-endpoints";
+import type { SearchParameters } from "@notionhq/client/build/src/api-endpoints";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import type { HonoBindings } from "./types";
