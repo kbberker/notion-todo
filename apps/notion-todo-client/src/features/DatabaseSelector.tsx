@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import "./App.css";
 import type { DatabaseSearchResponse } from "nt-types";
 
 export function DatabaseSelector() {
@@ -29,13 +28,15 @@ export function DatabaseSelector() {
   });
 
   return (
-    <>
-      <h1>Choose your database to use as your task list</h1>
-      <ul>
+    <div>
+      <h1 className="text-2xl font-bold">
+        Choose your database to use as your task list
+      </h1>
+      <ul className="list-inside list-disc">
         {databases.map((database) => (
           <li key={database}>{database}</li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
