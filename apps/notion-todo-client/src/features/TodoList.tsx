@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ApiDatabaseResponse } from "nt-types";
+import { Route } from "../routes/tasks.$dbId";
 
 export const TodoList = () => {
+  const { dbId } = Route.useParams();
+
   const { data, isLoading } = useQuery({
     queryKey: ["todos"],
     queryFn: async () => {
       const response = await fetch(
-        "http://localhost:8787/api/databases/1f87b593-584a-8050-b7fb-f59ed6e0abf6/tasks"
+        `http://localhost:8787/api/databases/${dbId}/tasks`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

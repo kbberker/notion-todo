@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import type { DatabaseSearchResponse } from "nt-types";
 
 export function DatabaseSelector() {
+  const navigate = useNavigate();
+
   const { data, isLoading } = useQuery({
     queryKey: ["todos"],
     queryFn: async () => {
@@ -23,10 +26,6 @@ export function DatabaseSelector() {
     return <div>No databases found</div>;
   }
 
-  const databases = data.results.map((database) => {
-    return database.title[0]?.plain_text || "Untitled Database";
-  });
-
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const target = event.currentTarget;
@@ -35,14 +34,17 @@ export function DatabaseSelector() {
     ) as HTMLSelectElement | null;
     const value = select?.value;
     console.log({ value });
+    if (value) {
+      navigate({ to: `/tasks/${value}` });
+    }
   };
 
   return (
     <div>
       <form onSubmit={onSubmit}>
         <label htmlFor="database-select">Select a database:</label>
-        <select id="database-select">
-          <option value="" disabled selected>
+        <select id="database-select" defaultValue="" name="database-select">
+          <option value="" disabled>
             -- Select a database --
           </option>
           {data.results.map((database) => (
