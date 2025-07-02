@@ -27,16 +27,32 @@ export function DatabaseSelector() {
     return database.title[0]?.plain_text || "Untitled Database";
   });
 
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const target = event.currentTarget;
+    const select = target.elements.namedItem(
+      "database-select"
+    ) as HTMLSelectElement | null;
+    const value = select?.value;
+    console.log({ value });
+  };
+
   return (
     <div>
-      <h1 className="text-2xl font-bold">
-        Choose your database to use as your task list
-      </h1>
-      <ul className="list-inside list-disc">
-        {databases.map((database) => (
-          <li key={database}>{database}</li>
-        ))}
-      </ul>
+      <form onSubmit={onSubmit}>
+        <label htmlFor="database-select">Select a database:</label>
+        <select id="database-select">
+          <option value="" disabled selected>
+            -- Select a database --
+          </option>
+          {data.results.map((database) => (
+            <option key={database.id} value={database.id}>
+              {database.title[0]?.plain_text || "Untitled Database"}
+            </option>
+          ))}
+        </select>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
