@@ -1,21 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import type { DatabaseSearchResponse } from "nt-types";
+import { useGetDatabases } from "../hooks/useGetDatabses";
 
 export function DatabaseSelector() {
   const navigate = useNavigate();
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["todos"],
-    queryFn: async () => {
-      const response = await fetch("http://localhost:8787/api/databases");
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      return response.json() as Promise<DatabaseSearchResponse>;
-    },
-  });
+  const { data, isLoading } = useGetDatabases();
 
   if (isLoading) {
     return <div>Loading...</div>;
