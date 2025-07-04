@@ -3,7 +3,7 @@ import type { DatabaseSearchResponse } from "nt-types";
 
 export const useGetDatabases = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ["todos"],
+    queryKey: ["databases"],
     queryFn: async () => {
       const response = await fetch("http://localhost:8787/api/databases");
       if (!response.ok) {
