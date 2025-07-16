@@ -13,3 +13,7 @@ The essential principles are:
   * `Next action` - when a project has several tasks, it helps to choose *just one* task that you need to work on next. Each project should always have a `next action` defined.
   * `In progress` - any tasks that you are currently actively working on
   * `Done` - woop woop! Well done, you're one step closer to completing your goals! 🥳
+
+  # Tools
+
+  * This repo uses [Biome](https://biomejs.dev/) for formatting and linting
