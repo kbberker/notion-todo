@@ -6,18 +6,8 @@ import type {
 } from "nt-types";
 import { useGetDatabases } from "../hooks/useGetDatabses";
 import { Route } from "../routes/tasks.$dbId";
-
-type GroupedTasks = {
-	[groupId: string]: {
-		groupName: string;
-		options: {
-			[optionId: string]: {
-				optionName: string;
-				tasks: NotionDatabaseResponse["results"];
-			};
-		};
-	};
-};
+import { GroupedTasksDisplay } from "./GroupedTasks";
+import type { GroupedTasks } from "./types";
 
 function groupTasksByStatus(
 	tasks: NotionDatabaseResponse["results"],
@@ -77,7 +67,9 @@ export const TodoList = () => {
 				throw new Error("Network response was not ok");
 			}
 
-			return response.json() as Promise<ApiResponse<NotionDatabaseResponse>>;
+			return response.json() as Promise<
+				ApiResponse<NotionDatabaseResponse>
+			>;
 		},
 	});
 
@@ -131,13 +123,7 @@ export const TodoList = () => {
 		<div>
 			<h1>Todo List</h1>
 
-			{tasks.map((task) => {
-				return (
-					<div key={Math.random()}>
-						<p>{task}</p>
-					</div>
-				);
-			})}
+			<GroupedTasksDisplay groupedTasks={groupedTasks} />
 		</div>
 	);
 };
