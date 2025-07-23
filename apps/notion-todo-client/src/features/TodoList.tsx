@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type {
-	ApiDatabaseResponse,
+	ApiResponse,
+	NotionDatabaseResponse,
 	StatusDatabasePropertyConfigResponse,
 } from "nt-types";
 import { useGetDatabases } from "../hooks/useGetDatabses";
@@ -12,14 +13,14 @@ type GroupedTasks = {
 		options: {
 			[optionId: string]: {
 				optionName: string;
-				tasks: ApiDatabaseResponse["results"];
+				tasks: NotionDatabaseResponse["results"];
 			};
 		};
 	};
 };
 
 function groupTasksByStatus(
-	tasks: ApiDatabaseResponse["results"],
+	tasks: NotionDatabaseResponse["results"],
 	statusProperties: StatusDatabasePropertyConfigResponse,
 ) {
 	const groupedTasks = tasks.reduce((acc: GroupedTasks, task) => {
@@ -76,7 +77,7 @@ export const TodoList = () => {
 				throw new Error("Network response was not ok");
 			}
 
-			return response.json() as Promise<ApiDatabaseResponse>;
+			return response.json() as Promise<ApiResponse<NotionDatabaseResponse>>;
 		},
 	});
 
@@ -96,11 +97,23 @@ export const TodoList = () => {
 		return <div>Loading...</div>;
 	}
 
-	if (!tasksData || tasksData.results.length === 0) {
+	if (!tasksData) {
 		return <div>No tasks found.</div>;
 	}
 
-	const tasks = tasksData?.results.map((task) => {
+	if (!tasksData.success) {
+		return (
+			<div>
+				Error: {tasksData.error.message} (Code: {tasksData.error.code})
+			</div>
+		);
+	}
+
+	if (tasksData.data.results.length === 0) {
+		return <div>No tasks found.</div>;
+	}
+
+	const tasks = tasksData.data.results.map((task) => {
 		const name = Object.values(task.properties).find(
 			(property) => property.type === "title",
 		)?.title[0]?.plain_text;
@@ -109,7 +122,7 @@ export const TodoList = () => {
 	});
 
 	const groupedTasks = groupTasksByStatus(
-		tasksData?.results,
+		tasksData.data.results,
 		statusProperties[0],
 	);
 	console.log({ groupedTasks });

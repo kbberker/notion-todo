@@ -6,7 +6,7 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 
-export type ApiDatabaseResponse = Omit<QueryDatabaseResponse, "results"> & {
+export type NotionDatabaseResponse = Omit<QueryDatabaseResponse, "results"> & {
 	results: PageObjectResponse[];
 };
 

@@ -1,8 +1,4 @@
-import type {
-	QueryDatabaseResponse,
-	SearchParameters,
-	SearchResponse,
-} from "@notionhq/client/build/src/api-endpoints";
+import type { SearchParameters } from "@notionhq/client/build/src/api-endpoints";
 import { Hono } from "hono";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 import type {
@@ -10,6 +6,7 @@ import type {
 	ApiErrorResponse,
 	ApiSuccessResponse,
 	DatabaseSearchResponse,
+	NotionDatabaseResponse,
 } from "nt-types";
 import type { HonoBindings } from "../types";
 
@@ -150,10 +147,10 @@ databases.get("/:id/tasks", async (c) => {
 		}
 
 		// Parse JSON with error handling
-		let databaseQueryResponse: QueryDatabaseResponse;
+		let databaseQueryResponse: NotionDatabaseResponse;
 		try {
 			databaseQueryResponse =
-				(await response.json()) as QueryDatabaseResponse;
+				(await response.json()) as NotionDatabaseResponse;
 		} catch (parseError) {
 			const errorResponse = createErrorResponse(
 				"INVALID_RESPONSE",
@@ -167,7 +164,7 @@ databases.get("/:id/tasks", async (c) => {
 		}
 
 		// Return success response
-		const successResponse: ApiSuccessResponse<QueryDatabaseResponse> = {
+		const successResponse: ApiSuccessResponse<NotionDatabaseResponse> = {
 			success: true,
 			data: databaseQueryResponse,
 		};
