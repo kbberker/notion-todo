@@ -6,7 +6,7 @@ import type {
 } from "nt-types";
 import { useGetDatabases } from "../hooks/useGetDatabses";
 import { Route } from "../routes/tasks.$dbId";
-import { GroupedTasksDisplay } from "./GroupedTasks";
+import { GroupedTasksDisplay } from "./GroupedTasksDisplay";
 import type { GroupedTasks } from "./types";
 
 function groupTasksByStatus(
@@ -105,25 +105,11 @@ export const TodoList = () => {
 		return <div>No tasks found.</div>;
 	}
 
-	const tasks = tasksData.data.results.map((task) => {
-		const name = Object.values(task.properties).find(
-			(property) => property.type === "title",
-		)?.title[0]?.plain_text;
-
-		return name;
-	});
-
 	const groupedTasks = groupTasksByStatus(
 		tasksData.data.results,
 		statusProperties[0],
 	);
 	console.log({ groupedTasks });
 
-	return (
-		<div>
-			<h1>Todo List</h1>
-
-			<GroupedTasksDisplay groupedTasks={groupedTasks} />
-		</div>
-	);
+	return <GroupedTasksDisplay groupedTasks={groupedTasks} />;
 };
