@@ -22,7 +22,8 @@
   "javascript": {
     "formatter": {
       "quoteStyle": "double",
-      "indentStyle": "tab"
+      "indentStyle": "space",
+      "indentWidth": 2
     }
   },
   "vcs": {
