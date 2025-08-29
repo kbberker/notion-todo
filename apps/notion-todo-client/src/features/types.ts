@@ -1,11 +1,11 @@
 import type { NotionDatabaseResponse } from "nt-types";
 
-export type GroupedTasks = {
-	[groupId: string]: {
-		groupName: string;
-		options: {
-			[optionId: string]: {
-				optionName: string;
+export type GroupedByStatusTasks = {
+	[statusGroupId: string]: {
+		statusGroupName: string;
+		subStatuses: {
+			[subStatusId: string]: {
+				subStatusName: string;
 				tasks: NotionDatabaseResponse["results"];
 			};
 		};

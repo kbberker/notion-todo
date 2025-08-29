@@ -7,13 +7,13 @@ import type {
 import { useGetDatabases } from "../hooks/useGetDatabses";
 import { Route } from "../routes/tasks.$dbId";
 import { GroupedTasksDisplay } from "./GroupedTasksDisplay";
-import type { GroupedTasks } from "./types";
+import type { GroupedByStatusTasks } from "./types";
 
 function groupTasksByStatus(
 	tasks: NotionDatabaseResponse["results"],
 	statusProperties: StatusDatabasePropertyConfigResponse,
 ) {
-	const groupedTasks = tasks.reduce((acc: GroupedTasks, task) => {
+	const groupedTasks = tasks.reduce((acc: GroupedByStatusTasks, task) => {
 		const taskStatusObj = Object.values(task.properties).find(
 			(property) => property.type === "status",
 		);
@@ -32,24 +32,24 @@ function groupTasksByStatus(
 		if (taskStatusGroup?.id) {
 			if (!acc[taskStatusGroup.id]) {
 				acc[taskStatusGroup.id] = {
-					groupName: taskStatusGroup.name,
-					options: {},
+					statusGroupName: taskStatusGroup.name,
+					subStatuses: {},
 				};
 			}
-			const optionId = taskStatus.id;
-			const optionName = taskStatus.name;
-			if (!acc[taskStatusGroup.id].options[optionId]) {
-				acc[taskStatusGroup.id].options[optionId] = {
-					optionName,
+			const taskStatusId = taskStatus.id;
+			const taskStatusName = taskStatus.name;
+			if (!acc[taskStatusGroup.id].subStatuses[taskStatusId]) {
+				acc[taskStatusGroup.id].subStatuses[taskStatusId] = {
+					subStatusName: taskStatusName,
 					tasks: [],
 				};
 			}
 
-			acc[taskStatusGroup.id].options[optionId].tasks.push(task);
+			acc[taskStatusGroup.id].subStatuses[taskStatusId].tasks.push(task);
 		}
 
 		return acc;
-	}, {} as GroupedTasks);
+	}, {} as GroupedByStatusTasks);
 
 	return groupedTasks;
 }
