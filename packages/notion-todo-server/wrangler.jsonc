@@ -1,3 +1,4 @@
+// run `npx wrangler types` after making any changes
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "notion-todo-server",

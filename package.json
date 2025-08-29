@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "biome lint .",
     "preview": "vite preview"
   },
   "dependencies": {
