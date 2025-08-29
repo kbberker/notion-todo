@@ -8,9 +8,7 @@ export const useGetDatabases = () => {
 			const response = await fetch("http://localhost:8787/api/databases");
 
 			if (!response.ok) {
-				throw new Error(
-					`HTTP ${response.status}: ${response.statusText}`,
-				);
+				throw new Error(`HTTP ${response.status}: ${response.statusText}`);
 			}
 
 			const result =

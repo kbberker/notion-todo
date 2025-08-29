@@ -149,8 +149,7 @@ databases.get("/:id/tasks", async (c) => {
 		// Parse JSON with error handling
 		let databaseQueryResponse: NotionDatabaseResponse;
 		try {
-			databaseQueryResponse =
-				(await response.json()) as NotionDatabaseResponse;
+			databaseQueryResponse = (await response.json()) as NotionDatabaseResponse;
 		} catch (parseError) {
 			const errorResponse = createErrorResponse(
 				"INVALID_RESPONSE",
