@@ -14,6 +14,15 @@ The essential principles are:
   * `In progress` - any tasks that you are currently actively working on
   * `Done` - woop woop! Well done, you're one step closer to completing your goals! 🥳
 
-  # Tools
+# Tools
 
-  * This repo uses [Biome](https://biomejs.dev/) for formatting and linting
+* This repo uses [Biome](https://biomejs.dev/) for formatting and linting
+
+## Development
+
+Some helpful commands
+
+```bash
+npm install
+npm run dev # will start both the server (port 8787) and client (port 5173)
+```
