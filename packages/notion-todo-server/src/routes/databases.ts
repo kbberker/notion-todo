@@ -1,3 +1,4 @@
+import { collectPaginatedAPI } from "@notionhq/client";
 import type { SearchParameters } from "@notionhq/client/build/src/api-endpoints";
 import { Hono } from "hono";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
@@ -5,7 +6,7 @@ import type {
   ApiErrorCode,
   ApiErrorResponse,
   ApiSuccessResponse,
-  DatabaseSearchResponse,
+  DataSourceSearchResponse,
   NotionDatabaseResponse,
 } from "nt-types";
 import type { HonoBindings } from "../types";
@@ -64,7 +65,7 @@ databases.get("", async (c) => {
     const searchParams: SearchParameters = {
       filter: {
         property: "object",
-        value: "database",
+        value: "data_source",
       },
       sort: {
         direction: "descending",
@@ -89,9 +90,9 @@ databases.get("", async (c) => {
     }
 
     // Parse JSON with error handling
-    let responseJSON: DatabaseSearchResponse;
+    let responseJSON: DataSourceSearchResponse;
     try {
-      responseJSON = (await response.json()) as DatabaseSearchResponse;
+      responseJSON = (await response.json()) as DataSourceSearchResponse;
     } catch (parseError) {
       const errorResponse = createErrorResponse(
         "INVALID_RESPONSE",
@@ -105,7 +106,7 @@ databases.get("", async (c) => {
     }
 
     // Return success response
-    const successResponse: ApiSuccessResponse<DatabaseSearchResponse> = {
+    const successResponse: ApiSuccessResponse<DataSourceSearchResponse> = {
       success: true,
       data: responseJSON,
     };

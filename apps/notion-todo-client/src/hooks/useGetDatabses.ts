@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { ApiResponse, DatabaseSearchResponse } from "nt-types";
+import type { ApiResponse, DataSourceSearchResponse } from "nt-types";
 
 export const useGetDatabases = () => {
   const { data, isLoading, error } = useQuery({
@@ -12,7 +12,7 @@ export const useGetDatabases = () => {
       }
 
       const result =
-        (await response.json()) as ApiResponse<DatabaseSearchResponse>;
+        (await response.json()) as ApiResponse<DataSourceSearchResponse>;
 
       if (!result.success) {
         throw new Error(result.error.message);
