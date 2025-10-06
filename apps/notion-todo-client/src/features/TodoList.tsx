@@ -75,11 +75,13 @@ export const TodoList = () => {
     (db) => db.id === dbId,
   )?.properties;
 
+  // TODO: Handle multiple status properties or none
+  // Ideally there should be one, but we should handle edge cases
   const statusProperties = Object.values(properties || {}).filter(
     (property) => property.type === "status",
   );
 
-  console.log({ statusProperty: statusProperties });
+  console.log({ statusProperties });
 
   console.log({ data: tasksData });
 
