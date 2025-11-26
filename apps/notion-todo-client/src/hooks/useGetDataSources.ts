@@ -3,7 +3,7 @@ import type { ApiResponse, DataSourceSearchResponse } from "nt-types";
 
 export const useGetDataSources = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["databases"],
+    queryKey: ["data-sources"],
     queryFn: async () => {
       const response = await fetch("http://localhost:8787/api/databases");
 

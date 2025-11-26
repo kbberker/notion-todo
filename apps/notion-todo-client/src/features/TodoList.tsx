@@ -4,7 +4,7 @@ import type {
   NotionDatabaseResponse,
   StatusDatabasePropertyConfigResponse,
 } from "nt-types";
-import { useGetDataSources } from "../hooks/useGetDatabses";
+import { useGetDataSources } from "../hooks/useGetDataSources";
 import { Route } from "../routes/tasks.$dbId";
 import { GroupedTasksDisplay } from "./GroupedTasksDisplay";
 import type { GroupedByStatusTasks } from "./types";

@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useGetDataSources } from "../hooks/useGetDatabses";
+import { useGetDataSources } from "../hooks/useGetDataSources";
 
 export function DatabaseSelector() {
   const navigate = useNavigate();
@@ -47,14 +47,3 @@ export function DatabaseSelector() {
     </div>
   );
 }
-
-/**
- * "parent": {
-                    "type": "database_id",
-                    "database_id": "2557b593-584a-803e-9bd4-dd8bcae0232b"
-                },
-                "database_parent": {
-                    "type": "page_id",
-                    "page_id": "2557b593-584a-8060-afef-e638c8b9426b"
-                },
- */
