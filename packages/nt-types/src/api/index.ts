@@ -1,7 +1,6 @@
 import type { PageObjectResponse } from "@notionhq/client";
 import type {
   DataSourceObjectResponse,
-  // QueryDatabaseResponse, - deprecated
   GetDatabaseResponse,
   SearchResponse,
 } from "@notionhq/client/build/src/api-endpoints";
