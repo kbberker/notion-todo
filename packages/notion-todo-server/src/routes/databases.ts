@@ -5,7 +5,7 @@ import type {
   ApiErrorCode,
   ApiErrorResponse,
   ApiSuccessResponse,
-  DatabaseSearchResponse,
+  DataSourceSearchResponse,
   NotionDatabaseResponse,
 } from "nt-types";
 import type { HonoBindings } from "../types";
@@ -64,7 +64,7 @@ databases.get("", async (c) => {
     const searchParams: SearchParameters = {
       filter: {
         property: "object",
-        value: "database",
+        value: "data_source",
       },
       sort: {
         direction: "descending",
@@ -76,7 +76,7 @@ databases.get("", async (c) => {
       method: "POST",
       headers: {
         Authorization: `Bearer ${c.env.NOTION_TOKEN}`,
-        "Notion-Version": "2022-06-28",
+        "Notion-Version": "2025-09-03",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(searchParams),
@@ -89,9 +89,9 @@ databases.get("", async (c) => {
     }
 
     // Parse JSON with error handling
-    let responseJSON: DatabaseSearchResponse;
+    let responseJSON: DataSourceSearchResponse;
     try {
-      responseJSON = (await response.json()) as DatabaseSearchResponse;
+      responseJSON = (await response.json()) as DataSourceSearchResponse;
     } catch (parseError) {
       const errorResponse = createErrorResponse(
         "INVALID_RESPONSE",
@@ -105,7 +105,7 @@ databases.get("", async (c) => {
     }
 
     // Return success response
-    const successResponse: ApiSuccessResponse<DatabaseSearchResponse> = {
+    const successResponse: ApiSuccessResponse<DataSourceSearchResponse> = {
       success: true,
       data: responseJSON,
     };
@@ -129,12 +129,12 @@ databases.get("/:id/tasks", async (c) => {
     const id = c.req.param("id");
 
     const response = await fetch(
-      `https://api.notion.com/v1/databases/${id}/query`,
+      `https://api.notion.com/v1/data_sources/${id}/query`,
       {
         method: "POST",
         headers: {
           Authorization: `Bearer ${c.env.NOTION_TOKEN}`,
-          "Notion-Version": "2022-06-28",
+          "Notion-Version": "2025-09-03",
           "Content-Type": "application/json",
         },
       },

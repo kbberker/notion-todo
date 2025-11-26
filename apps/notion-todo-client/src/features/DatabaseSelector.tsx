@@ -1,10 +1,10 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useGetDatabases } from "../hooks/useGetDatabses";
+import { useGetDataSources } from "../hooks/useGetDataSources";
 
 export function DatabaseSelector() {
   const navigate = useNavigate();
 
-  const { data, isLoading } = useGetDatabases();
+  const { data, isLoading } = useGetDataSources();
 
   if (isLoading) {
     return <div>Loading...</div>;

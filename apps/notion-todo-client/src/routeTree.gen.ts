@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TasksDbIdRouteImport } from './routes/tasks.$dbId'
+import { Route as TasksDbIdTodayRouteImport } from './routes/tasks_.$dbId.today'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const TasksDbIdRoute = TasksDbIdRouteImport.update({
   path: '/tasks/$dbId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TasksDbIdTodayRoute = TasksDbIdTodayRouteImport.update({
+  id: '/tasks_/$dbId/today',
+  path: '/tasks/$dbId/today',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/tasks/$dbId': typeof TasksDbIdRoute
+  '/tasks/$dbId/today': typeof TasksDbIdTodayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/tasks/$dbId': typeof TasksDbIdRoute
+  '/tasks/$dbId/today': typeof TasksDbIdTodayRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/tasks/$dbId': typeof TasksDbIdRoute
+  '/tasks_/$dbId/today': typeof TasksDbIdTodayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tasks/$dbId'
+  fullPaths: '/' | '/tasks/$dbId' | '/tasks/$dbId/today'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tasks/$dbId'
-  id: '__root__' | '/' | '/tasks/$dbId'
+  to: '/' | '/tasks/$dbId' | '/tasks/$dbId/today'
+  id: '__root__' | '/' | '/tasks/$dbId' | '/tasks_/$dbId/today'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TasksDbIdRoute: typeof TasksDbIdRoute
+  TasksDbIdTodayRoute: typeof TasksDbIdTodayRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasksDbIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tasks_/$dbId/today': {
+      id: '/tasks_/$dbId/today'
+      path: '/tasks/$dbId/today'
+      fullPath: '/tasks/$dbId/today'
+      preLoaderRoute: typeof TasksDbIdTodayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TasksDbIdRoute: TasksDbIdRoute,
+  TasksDbIdTodayRoute: TasksDbIdTodayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

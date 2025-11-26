@@ -1,17 +1,17 @@
 import type { PageObjectResponse } from "@notionhq/client";
 import type {
-  DatabaseObjectResponse,
-  QueryDatabaseResponse,
+  DataSourceObjectResponse,
+  GetDatabaseResponse,
   SearchResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 
-export type NotionDatabaseResponse = Omit<QueryDatabaseResponse, "results"> & {
+export type NotionDatabaseResponse = Omit<GetDatabaseResponse, "results"> & {
   results: PageObjectResponse[];
 };
 
-export type DatabaseSearchResponse = Omit<SearchResponse, "results"> & {
-  results: DatabaseObjectResponse[];
+export type DataSourceSearchResponse = Omit<SearchResponse, "results"> & {
+  results: DataSourceObjectResponse[];
 };
 
 type SelectColor =
