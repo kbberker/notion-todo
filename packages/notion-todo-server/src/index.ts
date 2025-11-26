@@ -15,7 +15,7 @@ app.get("/search", async (c) => {
   const searchParams: SearchParameters = {
     filter: {
       property: "object",
-      value: "database",
+      value: "data_source",
     },
   };
 
@@ -23,7 +23,7 @@ app.get("/search", async (c) => {
     method: "POST",
     headers: {
       Authorization: `Bearer ${c.env.NOTION_TOKEN}`,
-      "Notion-Version": "2022-06-28",
+      "Notion-Version": "2025-09-03",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(searchParams),

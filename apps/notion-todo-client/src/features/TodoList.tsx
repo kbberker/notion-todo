@@ -4,7 +4,7 @@ import type {
   NotionDatabaseResponse,
   StatusDatabasePropertyConfigResponse,
 } from "nt-types";
-import { useGetDatabases } from "../hooks/useGetDatabses";
+import { useGetDataSources } from "../hooks/useGetDatabses";
 import { Route } from "../routes/tasks.$dbId";
 import { GroupedTasksDisplay } from "./GroupedTasksDisplay";
 import type { GroupedByStatusTasks } from "./types";
@@ -25,6 +25,7 @@ function groupTasksByStatus(
     }
 
     // Each task's status' ID will belong to one of the status groups
+    // `statusProperties` seems to be an array
     const taskStatusGroup = statusProperties.status.groups.find((group) =>
       group.option_ids.includes(taskStatus.id),
     );
@@ -56,7 +57,7 @@ function groupTasksByStatus(
 
 export const TodoList = () => {
   const { dbId } = Route.useParams();
-  const { data: databases } = useGetDatabases();
+  const { data: databases } = useGetDataSources();
   const { data: tasksData, isLoading } = useQuery({
     queryKey: ["tasks", dbId],
     queryFn: async () => {
@@ -71,9 +72,13 @@ export const TodoList = () => {
     },
   });
 
-  const properties = databases?.results.find(
-    (db) => db.id === dbId,
-  )?.properties;
+  const matchedDatabase = databases?.results.find((db) => db.id === dbId);
+
+  if (!matchedDatabase) {
+    return <div>Database not found.</div>;
+  }
+
+  const properties = matchedDatabase.properties;
 
   // TODO: Handle multiple status properties or none
   // Ideally there should be one, but we should handle edge cases
