@@ -32,7 +32,7 @@
     "nt-types": "*",
     "typescript": "~5.9.0",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5"
+    "vite": "^7.0.0"
   },
   "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
   "author": "",
