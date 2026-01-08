@@ -62,7 +62,7 @@ export const TodoList = () => {
     queryKey: ["tasks", dbId],
     queryFn: async () => {
       const response = await fetch(
-        `http://localhost:8787/api/databases/${dbId}/tasks`,
+        `${import.meta.env.VITE_API_URL}/api/databases/${dbId}/tasks`,
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

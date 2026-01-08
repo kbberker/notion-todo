@@ -5,7 +5,9 @@ export const useGetDataSources = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["data-sources"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:8787/api/databases");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/databases`,
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
