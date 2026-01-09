@@ -86,10 +86,6 @@ export const TodoList = () => {
     (property) => property.type === "status",
   );
 
-  console.log({ statusProperties });
-
-  console.log({ data: tasksData });
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -114,7 +110,6 @@ export const TodoList = () => {
     tasksData.data.results,
     statusProperties[0],
   );
-  console.log({ groupedTasks });
 
   return <GroupedTasksDisplay groupedTasks={groupedTasks} />;
 };

@@ -10,7 +10,6 @@ export function DatabaseSelector() {
     return <div>Loading...</div>;
   }
 
-  console.log({ data });
   if (!data) {
     return <div>No databases found</div>;
   }
@@ -22,7 +21,7 @@ export function DatabaseSelector() {
       "database-select",
     ) as HTMLSelectElement | null;
     const value = select?.value;
-    console.log({ value });
+
     if (value) {
       navigate({ to: `/tasks/${value}` });
     }
