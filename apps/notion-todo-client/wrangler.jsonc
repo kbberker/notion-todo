@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "notion-todo-client",
+  "compatibility_date": "2026-01-08",
+  "assets": {
+    "not_found_handling": "single-page-application"
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  "vars": {
+    "VITE_API_URL": "https://notion-todo-server.kbbuk90.workers.dev"
+  }
+}
