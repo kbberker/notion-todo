@@ -17,7 +17,4 @@ export default defineConfig({
       inspectorPort: 9292, // default 9229 - changed to avoid conflicts
     }),
   ],
-  server: {
-    cors: true, // Don't forget to enable CORS
-  },
 });
