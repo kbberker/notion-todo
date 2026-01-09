@@ -1,3 +1,4 @@
+import { cloudflare } from "@cloudflare/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react-swc";
@@ -12,6 +13,9 @@ export default defineConfig({
     }),
     tailwindcss(),
     react(),
+    cloudflare({
+      inspectorPort: 9292, // default 9229 - changed to avoid conflicts
+    }),
   ],
   server: {
     cors: true, // Don't forget to enable CORS
