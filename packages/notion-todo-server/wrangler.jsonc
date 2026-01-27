@@ -1,21 +1,22 @@
 // run `npx wrangler types` after making any changes
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
+  "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "notion-todo-server",
   "main": "src/index.ts",
-  "compatibility_date": "2025-05-24"
+  "compatibility_date": "2025-05-24",
+  "kv_namespaces": [
+    {
+      "binding": "USER_SESSION",
+      "id": "676e91c120934e7fa605df3ae2e6ddab"
+    }
+  ]
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
   // "vars": {
   //   "MY_VAR": "my-variable"
   // },
-  // "kv_namespaces": [
-  //   {
-  //     "binding": "MY_KV_NAMESPACE",
-  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  //   }
-  // ],
+
   // "r2_buckets": [
   //   {
   //     "binding": "MY_BUCKET",
