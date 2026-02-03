@@ -2,6 +2,7 @@ import type { PageObjectResponse } from "@notionhq/client";
 import type {
   DataSourceObjectResponse,
   GetDatabaseResponse,
+  OauthTokenResponse,
   SearchResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
@@ -76,3 +77,5 @@ export type ApiSuccessResponse<T> = {
 };
 
 export type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;
+
+export type NotionOauthTokenResponse = OauthTokenResponse;
