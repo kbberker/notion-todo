@@ -103,3 +103,17 @@ work.
 - Local server secrets live in `packages/notion-todo-server/.dev.vars` (gitignored).
 - Client reads the server URL from `VITE_API_URL` (`.env.development` →
   localhost:8787; production set in the client's `wrangler.jsonc` vars).
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as GitHub issues in `kbberker/notion-todo` (via the `gh` CLI). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Canonical five-role vocabulary, default strings (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: root `docs/adr/`, no `CONTEXT.md` yet. See `docs/agents/domain.md`.
