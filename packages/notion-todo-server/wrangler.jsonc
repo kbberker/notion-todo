@@ -9,13 +9,13 @@
       "binding": "USER_SESSION",
       "id": "676e91c120934e7fa605df3ae2e6ddab"
     }
-  ]
+  ],
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
-  // "vars": {
-  //   "MY_VAR": "my-variable"
-  // },
+  "vars": {
+    "NOTION_REDIRECT_URI": "https://notiontaskmanager.app/api/oauth/callback"
+  }
 
   // "r2_buckets": [
   //   {
