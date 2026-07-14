@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "tsc -b && vite build",
+    "check-types": "turbo run check-types",
     "lint": "biome lint .",
     "preview": "vite preview"
   },
