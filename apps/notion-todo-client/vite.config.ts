@@ -17,4 +17,9 @@ export default defineConfig({
       inspectorPort: 9292, // default 9229 - changed to avoid conflicts
     }),
   ],
+  server: {
+    proxy: {
+      "/api": "http://localhost:8787",
+    },
+  },
 });

@@ -90,10 +90,10 @@ The app is moving from a single `NOTION_TOKEN` env var to per-user Notion OAuth:
 - `lib/cookies.ts` — `session_id` cookie helpers (httpOnly, secure, sameSite=lax).
 - `routes/auth.ts` — `/logout` deletes the session and clears the cookie.
 
-Note: `oauth`/`auth` routes are defined but **not yet mounted** in
-`src/index.ts`, and `routes/databases.ts` still uses the static `NOTION_TOKEN`
-rather than the session's access token. Wiring these together is the in-flight
-work.
+Note: `oauth`/`auth` routes are now mounted under `/api` in `src/index.ts`
+(`/api/oauth`, `/api/auth`), but `routes/databases.ts` still uses the static
+`NOTION_TOKEN` rather than the session's access token — that swap, plus
+`requireSession()` gating, is tracked in issue #61.
 
 ### Config & secrets
 
@@ -101,8 +101,12 @@ work.
   (`NOTION_TOKEN`, `NOTION_OAUTH_*`, `USER_SESSION` KV, etc.). Instantiate Hono as
   `new Hono<{ Bindings: HonoBindings }>()`.
 - Local server secrets live in `packages/notion-todo-server/.dev.vars` (gitignored).
-- Client reads the server URL from `VITE_API_URL` (`.env.development` →
-  localhost:8787; production set in the client's `wrangler.jsonc` vars).
+- Single-origin topology (`notiontaskmanager.app`): the client calls the API with
+  relative `/api/...` paths — there is no `VITE_API_URL` env var anymore. Locally,
+  Vite's dev server proxies `/api` → `http://localhost:8787` (`vite.config.ts`) so
+  cookie behavior matches production; in production the same origin serves both
+  via Cloudflare Worker Routes (`/api/*` → server, `/*` → client). See
+  `docs/adr/0001-single-origin-via-path-split-worker-routes.md`.
 
 ## Agent skills
 

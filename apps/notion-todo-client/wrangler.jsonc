@@ -6,8 +6,5 @@
     "not_found_handling": "single-page-application"
   },
   "workers_dev": true,
-  "preview_urls": true,
-  "vars": {
-    "VITE_API_URL": "https://notion-todo-server.kbbuk90.workers.dev"
-  }
+  "preview_urls": true
 }
