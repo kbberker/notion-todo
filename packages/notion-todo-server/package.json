@@ -7,11 +7,11 @@
     "lint": "biome lint ."
   },
   "dependencies": {
-    "@notionhq/client": "^5.0.0",
-    "hono": "^4.7.10",
+    "@notionhq/client": "5.23.2",
+    "hono": "4.12.30",
     "nt-types": "*"
   },
   "devDependencies": {
-    "wrangler": "^4.4.0"
+    "wrangler": "4.111.0"
   }
 }
