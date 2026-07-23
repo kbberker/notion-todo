@@ -12,6 +12,6 @@
     "nt-types": "*"
   },
   "devDependencies": {
-    "wrangler": "4.111.0"
+    "wrangler": "4.114.0"
   }
 }
